@@ -2,6 +2,9 @@ import { useState } from "react";
 import Papa from "papaparse";
 import FileUpload from "./components/FileUpload";
 import { normalizeUberData } from "./utils/parseUberCSV";
+import StatCard from "./components/StatCard";
+import "./App.css";
+
 import {
   getTotalTrips,
   getTotalSpent,
@@ -9,10 +12,12 @@ import {
   getAverageFare,
 } from "./utils/analytics";
 
+
+
 function App() {
   const [trips, setTrips] = useState([]);
 
-  const totalTips = getTotalTrips(trips);
+  const totalTrips = getTotalTrips(trips);
   const totalSpent = getTotalSpent(trips);
   const totalDistance = getTotalDistance(trips);
   const averageFare = getAverageFare(trips);
@@ -48,15 +53,24 @@ function App() {
       {trips.length > 0 && (
         <div>
          <h2>Your Uber Stats</h2>
-         <p>Total CSV Records: {trips.length}</p>
-
-         <p>Completed Trips: {totalTips}</p>
-
-         <p>Lifetime Fare: ${totalSpent.toFixed(2)}</p>
-
-         <p>Total Distance: {totalDistance.toFixed(1)} miles</p>
-
-         <p>Average Fare: ${averageFare.toFixed(2)}</p>
+         <div className="stats-container">
+          <StatCard
+            title="Total Trips"
+            value={totalTrips}
+          />
+          <StatCard
+            title="Lifetime Fare"
+            value={`$${totalSpent.toFixed(2)}`}
+          />
+          <StatCard
+            title="Average Fare"
+            value={`$${averageFare.toFixed(2)}`}
+          />
+          <StatCard
+            title="Total Distance"
+            value={`${totalDistance.toFixed(2)} miles`}
+          />
+         </div>
         </div>
       )}
     </div>
