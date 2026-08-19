@@ -4,6 +4,7 @@ import FileUpload from "./components/FileUpload";
 import { normalizeUberData } from "./utils/parseUberCSV";
 import StatCard from "./components/StatCard";
 import "./App.css";
+import YearFilter from "./components/YearFilter";
 
 import {
   getTotalTrips,
@@ -16,11 +17,20 @@ import {
 
 function App() {
   const [trips, setTrips] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("all");  const filteredTrips = 
 
-  const totalTrips = getTotalTrips(trips);
-  const totalSpent = getTotalSpent(trips);
-  const totalDistance = getTotalDistance(trips);
-  const averageFare = getAverageFare(trips);
+  selectedYear === "all"
+    ? trips
+    : trips.filter((trip) => {
+        const tripYear = new Date(trip.requestTime).getFullYear();
+        return tripYear === Number(selectedYear);
+      });
+
+
+  const totalTrips = getTotalTrips(filteredTrips);
+  const totalSpent = getTotalSpent(filteredTrips);
+  const totalDistance = getTotalDistance(filteredTrips);
+  const averageFare = getAverageFare(filteredTrips);
   
   const handleFileUpload = (file) => {
     Papa.parse(file, {
@@ -53,13 +63,18 @@ function App() {
       {trips.length > 0 && (
         <div>
          <h2>Your Uber Stats</h2>
+
+          <YearFilter
+            selectedYear={selectedYear}
+            onYearChange={setSelectedYear}
+          />
          <div className="stats-container">
           <StatCard
             title="Total Trips"
             value={totalTrips}
           />
           <StatCard
-            title="Lifetime Fare"
+            title="Yearly Fare"
             value={`$${totalSpent.toFixed(2)}`}
           />
           <StatCard
