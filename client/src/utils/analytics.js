@@ -30,3 +30,41 @@ export function getTotalDistance(trips) {
         0
     );
 }
+
+export function getMonthlySpending(trips) {
+   const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+   ];
+   
+   
+   
+    const monthlyTotals = Array(12).fill(0);
+
+    const completedTrips = getCompletedTrips(trips);
+
+    completedTrips.forEach((trip) => {
+        const date = new Date(trip.requestTime);
+        
+        if (Number.isNaN(date.getTime())) {
+            return;
+        }
+
+        monthlyTotals[date.getMonth()] += trip.fare;
+    });
+    
+    return months.map((month, index) => ({
+        month,
+        spending: monthlyTotals[index],
+    }));
+}

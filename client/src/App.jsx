@@ -5,12 +5,14 @@ import { normalizeUberData } from "./utils/parseUberCSV";
 import StatCard from "./components/StatCard";
 import "./App.css";
 import YearFilter from "./components/YearFilter";
+import SpendingChart from "./components/SpendingChart";
 
 import {
   getTotalTrips,
   getTotalSpent,
   getTotalDistance,
   getAverageFare,
+  getMonthlySpending
 } from "./utils/analytics";
 
 
@@ -31,6 +33,7 @@ function App() {
   const totalSpent = getTotalSpent(filteredTrips);
   const totalDistance = getTotalDistance(filteredTrips);
   const averageFare = getAverageFare(filteredTrips);
+  const monthlySpending = getMonthlySpending(filteredTrips);
   
   const handleFileUpload = (file) => {
     Papa.parse(file, {
@@ -73,6 +76,8 @@ function App() {
             title="Total Trips"
             value={totalTrips}
           />
+
+          <SpendingChart data={monthlySpending} />
           <StatCard
             title="Yearly Fare"
             value={`$${totalSpent.toFixed(2)}`}
