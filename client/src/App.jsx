@@ -19,8 +19,17 @@ import {
 
 function App() {
   const [trips, setTrips] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("all");  const filteredTrips = 
+  const [selectedYear, setSelectedYear] = useState("all");  
+  
+    const availableYears = [
+    ...new Set(
+      trips
+      .map((trip) => new Date(trip.requestTime).getFullYear())
+      .filter((year) => !Number.isNaN(year))
+    ),
+  ].sort((a, b) => b - a);
 
+  const filteredTrips = 
   selectedYear === "all"
     ? trips
     : trips.filter((trip) => {
@@ -34,6 +43,7 @@ function App() {
   const totalDistance = getTotalDistance(filteredTrips);
   const averageFare = getAverageFare(filteredTrips);
   const monthlySpending = getMonthlySpending(filteredTrips);
+
   
   const handleFileUpload = (file) => {
     Papa.parse(file, {
@@ -65,9 +75,12 @@ function App() {
 
       {trips.length > 0 && (
         <div>
-         <h2>Your Uber Stats</h2>
+         <h2>{selectedYear === "all"
+            ? "Your Lifetime Uber Stats"
+            : `Your ${selectedYear} Uber Stats`}</h2>
 
           <YearFilter
+            years={availableYears}
             selectedYear={selectedYear}
             onYearChange={setSelectedYear}
           />
