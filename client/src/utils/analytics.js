@@ -68,3 +68,32 @@ export function getMonthlySpending(trips) {
         spending: monthlyTotals[index],
     }));
 }
+
+export function getRideTypeBreakdown(trips) {
+    const completedTrips = getCompletedTrips(trips);
+
+    const rideTypeCounts = {};
+
+    completedTrips.forEach((trip) => {
+        const rideType = trip.productType || "Unknown";
+
+        if (!rideTypeCounts[rideType]) {
+            rideTypeCounts[rideType] = 0;
+        }
+
+        rideTypeCounts[rideType] += 1;
+    });
+
+    const totalTrips = completedTrips.length;
+
+    return Object.entries(rideTypeCounts)
+        .map(([type, count]) => ({
+            type,
+            count,
+            percentage: 
+            totalTrips === 0
+                ? 0
+                : (count / totalTrips) * 100,
+        }))
+        .sort((a, b) => b.count - a.count);
+}

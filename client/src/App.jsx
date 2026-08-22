@@ -6,13 +6,15 @@ import StatCard from "./components/StatCard";
 import "./App.css";
 import YearFilter from "./components/YearFilter";
 import SpendingChart from "./components/SpendingChart";
+import RideTypeBreakdown from "./components/RideTypeBreakdown";
 
 import {
   getTotalTrips,
   getTotalSpent,
   getTotalDistance,
   getAverageFare,
-  getMonthlySpending
+  getMonthlySpending,
+  getRideTypeBreakdown
 } from "./utils/analytics";
 
 
@@ -43,6 +45,7 @@ function App() {
   const totalDistance = getTotalDistance(filteredTrips);
   const averageFare = getAverageFare(filteredTrips);
   const monthlySpending = getMonthlySpending(filteredTrips);
+  const rideTypeBreakdown = getRideTypeBreakdown(filteredTrips);
 
   
   const handleFileUpload = (file) => {
@@ -90,7 +93,6 @@ function App() {
             value={totalTrips}
           />
 
-          <SpendingChart data={monthlySpending} />
           <StatCard
             title="Yearly Fare"
             value={`$${totalSpent.toFixed(2)}`}
@@ -104,6 +106,8 @@ function App() {
             value={`${totalDistance.toFixed(2)} miles`}
           />
          </div>
+          <SpendingChart data={monthlySpending} />
+          <RideTypeBreakdown data={rideTypeBreakdown} />
         </div>
       )}
     </div>
