@@ -1,0 +1,25 @@
+.year-filter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0 24px;
+}
+
+.year-filter button {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.year-filter button:hover {
+  background: #f3f3f3;
+}
+
+.year-filter button.active {
+  background: black;
+  color: white;
+  border-color: black;
+}

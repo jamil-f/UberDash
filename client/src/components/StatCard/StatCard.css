@@ -1,0 +1,20 @@
+.stat-card {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+}
+
+.stat-card-title {
+  margin: 0;
+  font-size: 14px;
+}
+
+.stat-card h2 {
+  margin: 10px 0 0;
+  font-size: 32px;
+}
+
+.stat-card-subtitle {
+  margin-top: 8px;
+  font-size: 13px;
+}

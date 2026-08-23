@@ -2,12 +2,12 @@ import { useState } from "react";
 import Papa from "papaparse";
 import FileUpload from "./components/FileUpload";
 import { normalizeUberData } from "./utils/parseUberCSV";
-import StatCard from "./components/StatCard";
+import StatCard from "./components/StatCard/StatCard";
 import "./App.css";
-import YearFilter from "./components/YearFilter";
+import YearFilter from "./components/YearFilter/YearFilter";
 import SpendingChart from "./components/SpendingChart";
 import RideTypeBreakdown from "./components/RideTypeBreakdown";
-import TripHistory from "./components/TripHistory";
+import TripHistory from "./components/TripHistory/TripHistory";
 
 import {
   getTotalTrips,

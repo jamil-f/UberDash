@@ -1,3 +1,6 @@
+import "./TripHistory.css";
+
+
 function TripHistory({ trips }) {
     return (
         <div className="trip-history">
