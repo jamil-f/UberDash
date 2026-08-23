@@ -97,3 +97,12 @@ export function getRideTypeBreakdown(trips) {
         }))
         .sort((a, b) => b.count - a.count);
 }
+
+export function getTripHistory(trips) {
+    return getCompletedTrips(trips)
+        .filter((trip) => trip.requestTime)
+        .sort(
+            (a, b) =>
+                new Date(b.requestTime) - new Date(a.requestTime)
+        );
+}

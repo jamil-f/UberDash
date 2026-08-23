@@ -7,6 +7,7 @@ import "./App.css";
 import YearFilter from "./components/YearFilter";
 import SpendingChart from "./components/SpendingChart";
 import RideTypeBreakdown from "./components/RideTypeBreakdown";
+import TripHistory from "./components/TripHistory";
 
 import {
   getTotalTrips,
@@ -14,7 +15,8 @@ import {
   getTotalDistance,
   getAverageFare,
   getMonthlySpending,
-  getRideTypeBreakdown
+  getRideTypeBreakdown,
+  getTripHistory
 } from "./utils/analytics";
 
 
@@ -46,6 +48,7 @@ function App() {
   const averageFare = getAverageFare(filteredTrips);
   const monthlySpending = getMonthlySpending(filteredTrips);
   const rideTypeBreakdown = getRideTypeBreakdown(filteredTrips);
+  const tripHistory = getTripHistory(filteredTrips);
 
   
   const handleFileUpload = (file) => {
@@ -108,6 +111,7 @@ function App() {
          </div>
           <SpendingChart data={monthlySpending} />
           <RideTypeBreakdown data={rideTypeBreakdown} />
+          <TripHistory trips={tripHistory.slice(0, 10)} />
         </div>
       )}
     </div>
