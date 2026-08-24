@@ -25,3 +25,28 @@
 .trip-history td {
   font-size: 14px;
 }
+.load-more-button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.load-more-button:hover {
+  background: #f3f3f3;
+}
+
+.show-less-button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}

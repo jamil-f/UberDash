@@ -111,7 +111,10 @@ function App() {
          </div>
           <SpendingChart data={monthlySpending} />
           <RideTypeBreakdown data={rideTypeBreakdown} />
-          <TripHistory trips={tripHistory.slice(0, 10)} />
+          <TripHistory
+          key={selectedYear} 
+          trips={tripHistory} 
+          />
         </div>
       )}
     </div>
