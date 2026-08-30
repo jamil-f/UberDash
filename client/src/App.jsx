@@ -16,7 +16,12 @@ import {
   getAverageFare,
   getMonthlySpending,
   getRideTypeBreakdown,
-  getTripHistory
+  getTripHistory,
+  getTotalRideTime,
+  getLongestTrip,
+  getMostExpensiveTrip,
+  getAverageTripDistance,
+  getAirportTrips
 } from "./utils/analytics";
 
 
@@ -49,6 +54,11 @@ function App() {
   const monthlySpending = getMonthlySpending(filteredTrips);
   const rideTypeBreakdown = getRideTypeBreakdown(filteredTrips);
   const tripHistory = getTripHistory(filteredTrips);
+  const totalRideTime = getTotalRideTime(filteredTrips);
+  const longestTrip = getLongestTrip(filteredTrips);
+  const mostExpensiveTrip = getMostExpensiveTrip(filteredTrips);
+  const averageTripDistance = getAverageTripDistance(filteredTrips);
+  const airportTrips = getAirportTrips(filteredTrips);
 
   
   const handleFileUpload = (file) => {
@@ -108,6 +118,28 @@ function App() {
             title="Total Distance"
             value={`${totalDistance.toFixed(2)} miles`}
           />
+         </div>
+         <div className="stats-container">
+            <StatCard
+              title="Total Ride Time"
+              value={`${totalRideTime.toFixed(1)} hours`}
+              />
+            <StatCard 
+              title="Longest Trip"
+              value={`${longestTrip.toFixed(1)} miles`}
+          />
+            <StatCard 
+              title="Most Expensive Trip"
+              value={`$${mostExpensiveTrip.toFixed(2)}`}
+            />
+            <StatCard 
+              title="Average Trip Distance"
+              value={`${averageTripDistance.toFixed(1)} miles`}
+            />
+            <StatCard 
+              title="Airport Trips"
+              value={airportTrips}
+            />
          </div>
           <SpendingChart data={monthlySpending} />
           <RideTypeBreakdown data={rideTypeBreakdown} />

@@ -106,3 +106,54 @@ export function getTripHistory(trips) {
                 new Date(b.requestTime) - new Date(a.requestTime)
         );
 }
+
+export function getTotalRideTime(trips) {
+    const totalSeconds = getCompletedTrips(trips).reduce(
+        (total, trip) => total + trip.duration,
+        0
+    );
+
+    return totalSeconds / 3600;
+}
+
+export function getLongestTrip(trips) {
+    const completedTrips = getCompletedTrips(trips);
+
+    if (completedTrips.length === 0) {
+        return 0;
+    }
+
+    return Math.max(
+        ...completedTrips.map((trip) => trip.distance)
+    );
+}
+
+export function getMostExpensiveTrip(trips) {
+    const completedTrips = getCompletedTrips(trips);
+
+    if (completedTrips.length === 0) {
+        return 0;
+    }
+
+    return Math.max(
+        ...completedTrips.map((trip) => trip.fare)
+    );
+}
+
+export function getAverageTripDistance(trips) {
+    const completedTrips = getCompletedTrips(trips);
+
+    if(completedTrips.length === 0) {
+        return 0;
+    }
+
+    const totalDistance = getTotalDistance(completedTrips);
+
+    return totalDistance / completedTrips.length;
+}
+
+export function getAirportTrips(trips) {
+    return getCompletedTrips(trips).filter(
+        (trip) => trip.airportTrip
+    ).length;
+}
