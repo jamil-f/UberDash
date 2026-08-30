@@ -29,6 +29,9 @@ import {
 function App() {
   const [trips, setTrips] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all");  
+  const [uploadError, setUploadError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState("");
   
     const availableYears = [
     ...new Set(
@@ -62,11 +65,45 @@ function App() {
 
   
   const handleFileUpload = (file) => {
+    setTrips([]);
+    setSelectedYear("all");
+    setUploadedFileName("");
+    setUploadError("");
+    
+    if(!file.name.toLowerCase().endsWith(".csv")) {
+      setUploadError("Please upload a CSV file.");
+      return;
+    }
+
+    setIsLoading(true);
+    
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
 
       complete: (results) => {
+        const requiredColumns = [
+          "request_timestamp_local",
+          "fare_amount",
+          "trip_distance_miles",
+          "is_completed",
+          "product_type_name",
+        ];
+
+        const uploadedColumns = results.meta.fields || [];
+
+        const missingColumns = requiredColumns.filter(
+          (column) => !uploadedColumns.includes(column)
+        );
+
+        if (missingColumns.length > 0) {
+          setUploadError(
+            "This file does not appear to be a supported Uber trip export. Please upload trips_data.csv file from within the Rider stats folder from Uber Data."
+          );
+
+          setIsLoading(false);
+          return;
+        }
         console.log("Raw Uber data:", results.data);
 
         const normalizedTrips = normalizeUberData(results.data);
@@ -74,10 +111,19 @@ function App() {
         console.log("Normalized Uber data::", normalizedTrips);
 
         setTrips(normalizedTrips);
+        setUploadedFileName(file.name);
+        setUploadError("")
+        setIsLoading(false);
       },
 
       error: (error) => {
         console.error("Error parsing CSV:", error);
+
+        setUploadError(
+          "There was a problem reading this file. Please try again."
+        );
+
+        setIsLoading(false);
       },
     });
   };
@@ -88,6 +134,22 @@ function App() {
       <h1>Uber Analytics</h1>
 
       <FileUpload onFileUpload={handleFileUpload} />
+
+      {isLoading && (
+        <p>Processing your Uber data...</p>
+      )}
+
+      {uploadError && (
+        <p className="upload-error">
+          {uploadError}
+        </p>
+      )}
+
+      {uploadedFileName && !uploadError && (
+        <p>
+          Loaded: {uploadedFileName}
+        </p>
+      )}
 
       {trips.length > 0 && (
         <div>
