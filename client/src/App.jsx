@@ -6,7 +6,7 @@ import StatCard from "./components/StatCard/StatCard";
 import "./App.css";
 import YearFilter from "./components/YearFilter/YearFilter";
 import SpendingChart from "./components/SpendingChart";
-import RideTypeBreakdown from "./components/RideTypeBreakdown";
+import RideTypeBreakdown from "./components/RideTypeBreakdown/RideTypeBreakdown";
 import TripHistory from "./components/TripHistory/TripHistory";
 
 import {
@@ -32,6 +32,16 @@ function App() {
   const [uploadError, setUploadError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState("");
+  const [uploadKey, setUploadKey] = useState(0);
+
+  const handleReset = () => {
+    setTrips([]);
+    setSelectedYear("all");
+    setUploadError("");
+    setUploadedFileName("");
+    setIsLoading(false);
+    setUploadKey((current) => current + 1);
+  };
   
     const availableYears = [
     ...new Set(
@@ -132,8 +142,21 @@ function App() {
   return (
     <div>
       <h1>Uber Analytics</h1>
+      <>
+      
+      <FileUpload 
+        key={uploadKey}
+        onFileUpload={handleFileUpload} 
+      />
 
-      <FileUpload onFileUpload={handleFileUpload} />
+      <div className="privacy-message">
+        <strong>Your data stays private.</strong>
+        <p>
+          Your Uber CSV is processed locally in your browser.
+          Your trip data is not uploaded to our server permanently stored.
+        </p>
+      </div>
+      </>
 
       {isLoading && (
         <p>Processing your Uber data...</p>
@@ -147,7 +170,7 @@ function App() {
 
       {uploadedFileName && !uploadError && (
         <p>
-          Loaded: {uploadedFileName}
+          Loaded File: {uploadedFileName}
         </p>
       )}
 
@@ -156,6 +179,13 @@ function App() {
          <h2>{selectedYear === "all"
             ? "Your Lifetime Uber Stats"
             : `Your ${selectedYear} Uber Stats`}</h2>
+
+            <button
+              className="reset-button"
+              onClick={handleReset}
+            >
+              Upload Another File
+            </button>
 
           <YearFilter
             years={availableYears}
@@ -169,7 +199,7 @@ function App() {
           />
 
           <StatCard
-            title="Yearly Fare"
+            title={selectedYear === "all" ? "Lifetime Fare" : "Yearly Fare"}
             value={`$${totalSpent.toFixed(2)}`}
           />
           <StatCard

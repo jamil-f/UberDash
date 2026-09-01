@@ -1,3 +1,5 @@
+import "./RideTypeBreakdown.css";
+
 function RideTypeBreakdown({ data }) {
   return (
     <div className="ride-type-breakdown">

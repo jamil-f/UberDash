@@ -5,6 +5,38 @@
   margin-top: 30px;
 }
 
+.privacy-message {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  max-width: 600px;
+}
+
+.privacy-message strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.privacy-message p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.reset-button {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.reset-button:hover {
+  background: #f3f3f3;
+}
+
 
 @media (max-width: 900px) {
   .stats-container {

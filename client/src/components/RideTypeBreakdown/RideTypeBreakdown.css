@@ -1,0 +1,18 @@
+.ride-type-breakdown {
+  margin-top: 30px;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+}
+
+.ride-type-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.ride-type-row:last-child {
+  border-bottom: none;
+}
