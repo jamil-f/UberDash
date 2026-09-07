@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Papa from "papaparse";
-import FileUpload from "./components/FileUpload";
+import FileUpload from "./components/FileUpload/FileUpload";
 import { normalizeUberData } from "./utils/parseUberCSV";
 import StatCard from "./components/StatCard/StatCard";
 import "./App.css";
