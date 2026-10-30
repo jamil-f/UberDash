@@ -1,0 +1,175 @@
+.spending-gauge {
+  margin-top: 40px;
+  padding: 28px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+
+  background: white;
+}
+
+.gauge-heading {
+  margin-bottom: 10px;
+}
+
+.gauge-heading h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.gauge-heading p {
+  margin-top: 6px;
+  color: #777;
+  font-size: 14px;
+}
+
+.gauge-container {
+  position: relative;
+
+  width: 100%;
+  max-width: 750px;
+
+  margin: 0 auto;
+}
+
+.gauge-svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  overflow: visible;
+}
+
+/* Individual month sections */
+
+.gauge-segment {
+  fill: #bdbdbd;
+
+  stroke: white;
+  stroke-width: 3;
+
+  cursor: pointer;
+
+  transition:
+    fill 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.gauge-segment:hover {
+  fill: #555;
+  opacity: 1 !important;
+}
+
+.gauge-segment.selected {
+  fill: #111;
+  opacity: 1 !important;
+}
+
+/* Month names */
+
+.month-label {
+  fill: #333;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  user-select: none;
+
+  transition:
+    fill 0.2s ease,
+    font-size 0.2s ease;
+}
+
+.month-label.selected {
+  fill: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Speedometer needle */
+
+.gauge-needle {
+  pointer-events: none;
+
+  transition: transform 0.35s
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-needle line {
+  stroke: #111;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.needle-center {
+  fill: #111;
+  pointer-events: none;
+}
+
+.needle-center-inner {
+  fill: white;
+  pointer-events: none;
+}
+
+/* Digital-style readout */
+
+.gauge-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: -32px;
+
+  text-align: center;
+}
+
+.gauge-readout-month {
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+.gauge-readout-value {
+  margin-top: 4px;
+
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+.gauge-readout-label {
+  margin-top: 6px;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .spending-gauge {
+    padding: 18px;
+  }
+
+  .gauge-heading h2 {
+    font-size: 20px;
+  }
+
+  .month-label {
+    font-size: 10px;
+  }
+
+  .month-label.selected {
+    font-size: 11px;
+  }
+
+  .gauge-readout {
+    margin-top: -20px;
+  }
+}

@@ -8,6 +8,7 @@ import YearFilter from "./components/YearFilter/YearFilter";
 import SpendingChart from "./components/SpendingChart";
 import RideTypeBreakdown from "./components/RideTypeBreakdown/RideTypeBreakdown";
 import TripHistory from "./components/TripHistory/TripHistory";
+import SpendingGauge from "./components/SpendingGauge/SpendingGauge";
 
 import {
   getTotalTrips,
@@ -233,7 +234,8 @@ function App() {
               value={airportTrips}
             />
          </div>
-          <SpendingChart data={monthlySpending} />
+          {/* <SpendingChart data={monthlySpending} /> */}
+          <SpendingGauge data={monthlySpending} />
           <RideTypeBreakdown data={rideTypeBreakdown} />
           <TripHistory
           key={selectedYear} 
