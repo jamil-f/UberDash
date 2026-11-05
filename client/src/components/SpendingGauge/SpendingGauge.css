@@ -71,7 +71,7 @@
 .month-label {
   fill: #333;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 
   user-select: none;
@@ -127,6 +127,7 @@
 .gauge-readout-month {
   font-size: 13px;
   font-weight: 700;
+  margin-top: 12px;
 
   letter-spacing: 2px;
 

@@ -142,22 +142,25 @@ function App() {
 
   return (
     <div>
-      <h1>Uber Analytics</h1>
-      <>
-      
-      <FileUpload 
-        key={uploadKey}
-        onFileUpload={handleFileUpload} 
-      />
+       <h1>Uber Analytics</h1>
 
-      <div className="privacy-message">
-        <strong>Your data stays private.</strong>
-        <p>
-          Your Uber CSV is processed locally in your browser.
-          Your trip data is not uploaded to our server permanently stored.
-        </p>
-      </div>
+    {trips.length === 0 && (
+      <>
+        <FileUpload 
+          key={uploadKey}
+          onFileUpload={handleFileUpload} 
+        />
+
+        <div className="privacy-message">
+          <strong>Your data stays private.</strong>
+
+          <p>
+            Your Uber CSV is processed locally in your browser.
+            Your trip data is not uploaded to our server or permanently stored.
+          </p>
+        </div>
       </>
+    )}
 
       {isLoading && (
         <p>Processing your Uber data...</p>
